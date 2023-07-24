@@ -47,6 +47,12 @@ class Main extends Sprite
 	public function new()
 	{
 		super();
+		#if windows
+		@:functionCode('
+		#include <Windows.h>
+		SetProcessDPIAware()
+		')
+		#end
 
 		if (stage != null)
 		{
