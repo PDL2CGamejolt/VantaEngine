@@ -327,34 +327,6 @@ inline public static function removeDuplicates(string:Array<String>):Array<Strin
 	return tempArray;
 }
 
-/**
- * Executes the function in a seperate thread (if one is available), keeping the game from stopping execution until the function finished loading.
- * 
- * Use with caution!
- * @param func The function you want to execute
- * @param funcTwo Function to be executed if no thread is available (Will be executed on the main thread)
- * @param forceExecution If true, `func` will be executed even if no thread was available (however on the main thread).
- * Will load `funcTwo` aswell if it is not set to `null`!
- * @return True if a thread was available, False if no thread was available or on browser-targets
- */
-public static function loadThreaded(func:Void->Void, ?funcTwo:Void->Void = null, forceExecution:Bool = false):Bool
-{
-	#if (target.threaded && sys)
-	Main.threadPool.run(() ->
-	{
-		func();
-	});
-
-	return true;
-	#end
-	if (forceExecution)
-		func();
-	if (funcTwo != null)
-		funcTwo();
-
-	return false;
-}
-
 // shit below is for Debug class, but I'm sure you can use it elsewhere
 
 /**
