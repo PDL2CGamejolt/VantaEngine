@@ -1,0 +1,2 @@
+- Rework the loading screen
+- Stage editor (OS Engine has that so why not)
