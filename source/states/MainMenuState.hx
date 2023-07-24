@@ -38,7 +38,7 @@ class MainMenuState extends MusicBeatState
 
 	private var versionInt:Int = 1;
 	private var versionArray:Array<Array<Dynamic>> = [// Name, Version, X, Y
-		["Psych Engine v", psychEngineVersion, null, null],
+		["Vanta Engine v", vantaEngineVersion, null, null],
 			["Psych Engine v", psychEngineVersion, null, null],
 			["Friday Night Funkin' v", Application.current.meta.get('version'), null, null]
 	];
