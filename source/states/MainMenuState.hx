@@ -16,7 +16,8 @@ import options.OptionsState;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var psychEngineVersion:String = 'DEV BUILD'; //This is also used for Discord RPC
+	public static var vantaEngineVersion:String = '1.0-devgit'; 
+	public static var psychEngineVersion:String = '0.7'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
@@ -29,12 +30,18 @@ class MainMenuState extends MusicBeatState
 		#if MODS_ALLOWED 'mods', #end
 		#if ACHIEVEMENTS_ALLOWED 'awards', #end
 		'credits',
-		#if !switch 'donate', #end
 		'options'
 	];
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
+
+	private var versionInt:Int = 1;
+	private var versionArray:Array<Array<Dynamic>> = [// Name, Version, X, Y
+		["Psych Engine v", psychEngineVersion, null, null],
+			["Psych Engine v", psychEngineVersion, null, null],
+			["Friday Night Funkin' v", Application.current.meta.get('version'), null, null]
+	];
 
 	override function create()
 	{
@@ -116,14 +123,19 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollow, null, 0);
 
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Vanta Engine v" + psychEngineVersion, 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
+		versionArray.reverse();
+		for (i in 0...versionArray.length){// ngl it looks ugly, with all the [i]s
+			if (versionArray[i][1] == null) versionArray[i][1] = "";
+
+			var version:FlxText = new FlxText(12, FlxG.height - 22 * versionInt, 0, versionArray[i][0] + versionArray[i][1]);
+			version.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			version.scrollFactor.set();
+			version.x += versionArray[i][2];
+			version.y -= versionArray[i][3];
+			add(version);
+
+			versionInt++;
+		}
 
 		// NG.core.calls.event.logEvent('swag').send();
 
