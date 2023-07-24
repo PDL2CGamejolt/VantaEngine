@@ -530,6 +530,7 @@ class TitleState extends MusicBeatState
 				credGroup.add(money);
 				textGroup.add(money);
 			}
+			FlxTween.tween(money, {y: money.y + 350}, 0.5, {ease: FlxEase.expoOut, startDelay: 0.0});
 		}
 	}
 
@@ -541,6 +542,7 @@ class TitleState extends MusicBeatState
 			coolText.y += (textGroup.length * 60) + 200 + offset;
 			credGroup.add(coolText);
 			textGroup.add(coolText);
+			FlxTween.tween(coolText, {y: coolText.y - 750}, 0.5, {ease: FlxEase.expoOut, startDelay: 0.0});
 		}
 	}
 
