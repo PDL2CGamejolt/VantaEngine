@@ -105,15 +105,15 @@ class TitleState extends MusicBeatState
 			{
 				updateVersion = data.split('\n')[0].trim();
 				var curVersion:String = MainMenuState.psychEngineVersion.trim();
-				trace('version online: ' + updateVersion + ', your version: ' + curVersion);
+				trace('Version online: ' + updateVersion + ', your version: ' + curVersion);
 				if(updateVersion != curVersion) {
-					trace('versions arent matching!');
+					trace('Versions arent matching!');
 					mustUpdate = true;
 				}
 			}
 
 			http.onError = function (error) {
-				trace('error: $error');
+				trace('HTTP Error: $error');
 			}
 
 			http.request();
