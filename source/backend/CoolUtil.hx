@@ -132,10 +132,9 @@ class CoolUtil
 		}
 		return relevantContent;
 	}
-}
 
 #if sys
-public static function coolPathArray(path:String):Array<String>
+inline public static function coolPathArray(path:String):Array<String>
 {
 	return FileSystem.readDirectory(FileSystem.absolutePath(path));
 }
