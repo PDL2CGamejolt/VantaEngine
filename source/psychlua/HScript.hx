@@ -5,14 +5,13 @@ import hscript.Parser;
 import hscript.Interp;
 import hscript.Expr;
 #end
-
 import haxe.Exception;
-
 import objects.Character;
 
 class HScript
 {
 	public static var parser:Parser = new Parser();
+
 	public var interp:Interp;
 
 	public var variables(get, never):Map<String, Dynamic>;
@@ -22,11 +21,11 @@ class HScript
 	{
 		return interp.variables;
 	}
-	
+
 	public static function initHaxeModule(parent:FunkinLua)
 	{
 		#if hscript
-		if(parent.hscript == null)
+		if (parent.hscript == null)
 		{
 			trace('initializing haxe interp for: ${parent.scriptName}');
 			parent.hscript = new HScript(parent);
@@ -66,20 +65,23 @@ class HScript
 		interp.variables.set('getVar', function(name:String)
 		{
 			var result:Dynamic = null;
-			if(PlayState.instance.variables.exists(name)) result = PlayState.instance.variables.get(name);
+			if (PlayState.instance.variables.exists(name))
+				result = PlayState.instance.variables.get(name);
 			return result;
 		});
 		interp.variables.set('removeVar', function(name:String)
 		{
-			if(PlayState.instance.variables.exists(name))
+			if (PlayState.instance.variables.exists(name))
 			{
 				PlayState.instance.variables.remove(name);
 				return true;
 			}
 			return false;
 		});
-		interp.variables.set('debugPrint', function(text:String, ?color:FlxColor = null) {
-			if(color == null) color = FlxColor.WHITE;
+		interp.variables.set('debugPrint', function(text:String, ?color:FlxColor = null)
+		{
+			if (color == null)
+				color = FlxColor.WHITE;
 			FunkinLua.luaTrace(text, true, false, color);
 		});
 
@@ -90,7 +92,7 @@ class HScript
 		{
 			#if LUA_ALLOWED
 			for (script in PlayState.instance.luaArray)
-				if(script != null && script.lua != null && !script.closed)
+				if (script != null && script.lua != null && !script.closed)
 					Lua_helper.add_callback(script.lua, name, func);
 			#end
 			FunkinLua.customFunctions.set(name, func);
@@ -99,19 +101,23 @@ class HScript
 		// tested
 		interp.variables.set('createCallback', function(name:String, func:Dynamic, ?funk:FunkinLua = null)
 		{
-			if(funk == null) funk = parentLua;
+			if (funk == null)
+				funk = parentLua;
 			funk.addLocalCallback(name, func);
 		});
 
-		interp.variables.set('addHaxeLibrary', function(libName:String, ?libPackage:String = '') {
-			try {
+		interp.variables.set('addHaxeLibrary', function(libName:String, ?libPackage:String = '')
+		{
+			try
+			{
 				var str:String = '';
-				if(libPackage.length > 0)
+				if (libPackage.length > 0)
 					str = libPackage + '.';
 
 				interp.variables.set(libName, Type.resolveClass(str + libName));
 			}
-			catch (e:Dynamic) {
+			catch (e:Dynamic)
+			{
 				FunkinLua.lastCalledScript = parent;
 				FunkinLua.luaTrace(parentLua.scriptName + ":" + parentLua.lastCalledFunction + " - " + e, false, false, FlxColor.RED);
 			}
@@ -120,18 +126,37 @@ class HScript
 		#end
 	}
 
+	public static function getImports(code:String):Array<String>
+	{
+		var imports:Array<String> = [];
+		var re:EReg = ~/^(?:(?!"|')(?:[^"']|\.(?!"|'))*?)import\s+([\w.]+);$/m;
+		while (re.match(code))
+		{
+			imports.push(re.matched(1));
+			code = re.matchedRight();
+		}
+		return imports;
+	}
+
 	#if hscript
 	public function execute(codeToRun:String, ?funcToRun:String = null, ?funcArgs:Array<Dynamic>):Dynamic
 	{
+		for (imports in getImports(codeToRun))
+		{
+			var splitted:Array<String> = imports.split('.');
+			interp.variables.set(splitted[splitted.length - 1], Type.resolveClass(imports));
+		}
+		codeToRun = ~/^(?:(?!"|')(?:[^"']|\.(?!"|'))*?)import\s+([\w.]+);$/mg.replace(codeToRun, ""); // delete all imports
 		@:privateAccess
 		parser.line = 1;
 		parser.allowTypes = true;
 		var expr:Expr = parser.parseString(codeToRun);
-		try {
+		try
+		{
 			var value:Dynamic = interp.execute(parser.parseString(codeToRun));
 			return (funcToRun != null) ? executeFunction(funcToRun, funcArgs) : value;
 		}
-		catch(e:Exception)
+		catch (e:Exception)
 		{
 			FunkinLua.luaTrace(parentLua.scriptName + ":" + parentLua.lastCalledFunction + " - " + e, false, false, FlxColor.RED);
 			return null;
@@ -140,17 +165,20 @@ class HScript
 
 	public function executeFunction(funcToRun:String = null, funcArgs:Array<Dynamic>)
 	{
-		if(funcToRun != null)
+		if (funcToRun != null)
 		{
-			//trace('Executing $funcToRun');
-			if(interp.variables.exists(funcToRun))
+			// trace('Executing $funcToRun');
+			if (interp.variables.exists(funcToRun))
 			{
-				//trace('$funcToRun exists, executing...');
-				if(funcArgs == null) funcArgs = [];
-				try {
+				// trace('$funcToRun exists, executing...');
+				if (funcArgs == null)
+					funcArgs = [];
+				try
+				{
 					return Reflect.callMethod(null, interp.variables.get(funcToRun), funcArgs);
 				}
-				catch(e) FunkinLua.luaTrace(parentLua.scriptName + ":" + parentLua.lastCalledFunction + " - " + e, false, false, FlxColor.RED);
+				catch (e)
+					FunkinLua.luaTrace(parentLua.scriptName + ":" + parentLua.lastCalledFunction + " - " + e, false, false, FlxColor.RED);
 			}
 		}
 		return null;
@@ -160,38 +188,44 @@ class HScript
 	public static function implement(funk:FunkinLua)
 	{
 		#if LUA_ALLOWED
-		funk.addLocalCallback("runHaxeCode", function(codeToRun:String, ?varsToBring:Any = null, ?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null) {
+		funk.addLocalCallback("runHaxeCode", function(codeToRun:String, ?varsToBring:Any = null, ?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null)
+		{
 			var retVal:Dynamic = null;
 			#if hscript
 			initHaxeModule(funk);
-			try {
-				if(varsToBring != null)
+			try
+			{
+				if (varsToBring != null)
 				{
 					for (key in Reflect.fields(varsToBring))
 					{
-						//trace('Key $key: ' + Reflect.field(varsToBring, key));
+						// trace('Key $key: ' + Reflect.field(varsToBring, key));
 						funk.hscript.interp.variables.set(key, Reflect.field(varsToBring, key));
 					}
 				}
 				retVal = funk.hscript.execute(codeToRun, funcToRun, funcArgs);
 			}
-			catch (e:Dynamic) {
+			catch (e:Dynamic)
+			{
 				FunkinLua.luaTrace(funk.scriptName + ":" + funk.lastCalledFunction + " - " + e, false, false, FlxColor.RED);
 			}
 			#else
 			FunkinLua.luaTrace("runHaxeCode: HScript isn't supported on this platform!", false, false, FlxColor.RED);
 			#end
 
-			if(retVal != null && !LuaUtils.isOfTypes(retVal, [Bool, Int, Float, String, Array])) retVal = null;
+			if (retVal != null && !LuaUtils.isOfTypes(retVal, [Bool, Int, Float, String, Array]))
+				retVal = null;
 			return retVal;
 		});
-		
-		funk.addLocalCallback("runHaxeFunction", function(funcToRun:String, ?funcArgs:Array<Dynamic> = null) {
+
+		funk.addLocalCallback("runHaxeFunction", function(funcToRun:String, ?funcArgs:Array<Dynamic> = null)
+		{
 			#if hscript
-			try {
+			try
+			{
 				return funk.hscript.executeFunction(funcToRun, funcArgs);
 			}
-			catch(e:Exception)
+			catch (e:Exception)
 			{
 				FunkinLua.luaTrace(Std.string(e));
 				return null;
@@ -201,17 +235,20 @@ class HScript
 			#end
 		});
 
-		funk.addLocalCallback("addHaxeLibrary", function(libName:String, ?libPackage:String = '') {
+		funk.addLocalCallback("addHaxeLibrary", function(libName:String, ?libPackage:String = '')
+		{
 			#if hscript
 			initHaxeModule(funk);
-			try {
+			try
+			{
 				var str:String = '';
-				if(libPackage.length > 0)
+				if (libPackage.length > 0)
 					str = libPackage + '.';
 
 				funk.hscript.variables.set(libName, Type.resolveClass(str + libName));
 			}
-			catch (e:Dynamic) {
+			catch (e:Dynamic)
+			{
 				FunkinLua.luaTrace(funk.scriptName + ":" + funk.lastCalledFunction + " - " + e, false, false, FlxColor.RED);
 			}
 			#else
