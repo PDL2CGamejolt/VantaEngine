@@ -160,6 +160,9 @@ class PlayState extends MusicBeatState
 	public var playerStrums:FlxTypedGroup<StrumNote>;
 	public var grpNoteSplashes:FlxTypedGroup<NoteSplash>;
 
+	public var playerLaneUnderlay:FlxSprite;
+	public var opponentLaneUnderlay:FlxSprite;
+
 	public var camZooming:Bool = false;
 	public var camZoomingMult:Float = 1;
 	public var camZoomingDecay:Float = 1;
@@ -470,6 +473,22 @@ class PlayState extends MusicBeatState
 		add(strumLineNotes);
 		add(grpNoteSplashes);
 
+
+		if (ClientPrefs.laneUnderlayOpacity > 0) {
+			playerLaneUnderlay = new FlxSprite(0, 0).makeGraphic(110 * 4 + 50, FlxG.height * 2);
+			playerLaneUnderlay.alpha = ClientPrefs.laneUnderlayOpacity;
+			playerLaneUnderlay.color = FlxColor.BLACK;
+			playerLaneUnderlay.scrollFactor.set();
+			add(playerLaneUnderlay);
+			if (!ClientPrefs.middleScroll) {
+				opponentLaneUnderlay = new FlxSprite(0, 0).makeGraphic(110 * 4 + 50, FlxG.height * 2);
+				opponentLaneUnderlay.alpha = ClientPrefs.laneUnderlayOpacity;
+				opponentLaneUnderlay.color = FlxColor.BLACK;
+				opponentLaneUnderlay.scrollFactor.set();
+				add(opponentLaneUnderlay);
+			}
+		}
+
 		if(ClientPrefs.data.timeBarType == 'Song Name')
 		{
 			timeTxt.size = 24;
@@ -550,6 +569,9 @@ class PlayState extends MusicBeatState
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
+
+		playerLaneUnderlay.cameras = [camHUD];
+		opponentLaneUnderlay.cameras = [camHUD];
 
 		botplayTxt.cameras = [camHUD];
 		timeBar.cameras = [camHUD];
@@ -888,6 +910,10 @@ class PlayState extends MusicBeatState
 
 			generateStaticArrows(0);
 			generateStaticArrows(1);
+			playerLaneUnderlay.x = playerStrums.members[0].x - 25;
+			playerLaneUnderlay.screenCenter(Y);
+			opponentLaneUnderlay.x = opponentStrums.members[0].x - 25;
+			opponentLaneUnderlay.screenCenter(Y);
 			for (i in 0...playerStrums.length) {
 				setOnLuas('defaultPlayerStrumX' + i, playerStrums.members[i].x);
 				setOnLuas('defaultPlayerStrumY' + i, playerStrums.members[i].y);

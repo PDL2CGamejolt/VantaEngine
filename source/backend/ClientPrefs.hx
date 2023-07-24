@@ -79,6 +79,7 @@ class SaveVariables
 	public var badWindow:Int = 135;
 	public var safeFrames:Float = 10;
 	public var discordRPC:Bool = true;
+	public var laneUnderlayOpacity:Float = 0;
 
 	public function new()
 	{
