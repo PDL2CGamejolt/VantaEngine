@@ -21,21 +21,24 @@ to start you off, disabling Videos should be simple, simply Delete the line `"VI
 
 same goes for *Lua Scripts*, comment out or delete the line with `LUA_ALLOWED`, this and other customization options are all available within the `Project.xml` file
 
-## Credits:
+## Vanta Credits:
+* PDL2CGamejolt - Programmer
+* CharlesCatYT - Assistant Programmer
+
+## Psych Credits:
 * Shadow Mario - Programmer
 * RiverOaken - Artist
-* Yoshubs - Assistant Programmer
 
 ### Special Thanks
+* Yoshubs - Ex-Programmer, New Input System
 * bbpanzu - Ex-Programmer
-* Yoshubs - New Input System
 * SqirraRNG - Crash Handler and Base code for Chart Editor's Waveform
 * KadeDev - Fixed some cool stuff on Chart Editor and other PRs
 * iFlicky - Composer of Psync and Tea Time, also made the Dialogue Sounds
 * PolybiusProxy - .MP4 Video Loader Library (hxCodec)
 * Keoiki - Note Splash Animations
 * Smokey - Sprite Atlas Support
-* Nebula the Zorua - LUA JIT Fork and some Lua reworks
+* superpowers04 - LUA JIT Fork and some Lua reworks
 _____________________________________
 
 # Features
