@@ -476,15 +476,15 @@ class PlayState extends MusicBeatState
 		add(grpNoteSplashes);
 
 
-		if (ClientPrefs.laneUnderlayOpacity > 0) {
+		if (ClientPrefs.data.laneUnderlayOpacity > 0) {
 			playerLaneUnderlay = new FlxSprite(0, 0).makeGraphic(110 * 4 + 50, FlxG.height * 2);
-			playerLaneUnderlay.alpha = ClientPrefs.laneUnderlayOpacity;
+			playerLaneUnderlay.alpha = ClientPrefs.data.laneUnderlayOpacity;
 			playerLaneUnderlay.color = FlxColor.BLACK;
 			playerLaneUnderlay.scrollFactor.set();
 			add(playerLaneUnderlay);
 			if (!ClientPrefs.middleScroll) {
 				opponentLaneUnderlay = new FlxSprite(0, 0).makeGraphic(110 * 4 + 50, FlxG.height * 2);
-				opponentLaneUnderlay.alpha = ClientPrefs.laneUnderlayOpacity;
+				opponentLaneUnderlay.alpha = ClientPrefs.data.laneUnderlayOpacity;
 				opponentLaneUnderlay.color = FlxColor.BLACK;
 				opponentLaneUnderlay.scrollFactor.set();
 				add(opponentLaneUnderlay);
@@ -571,7 +571,7 @@ class PlayState extends MusicBeatState
 		vignette.y = 0;
 		vignette.updateHitbox();
 		vignette.alpha = 0;
-		if (ClientPrefs.enableVignette)
+		if (ClientPrefs.data.enableVignette)
 			add(vignette);
 
 		strumLineNotes.cameras = [camHUD];

@@ -118,9 +118,9 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 		
 		var option:Option = new Option('Lane Underlay Opacity', 
-		'How opaque should be a black underlay for note lanes.', 
+		'How opaque should be the black underlay for note lanes.', 
 		'laneUnderlayOpacity', 
-		'percent', 0);
+		'percent');
 		option.scrollSpeed = 1.6;
 		option.minValue = 0.0;
 		option.maxValue = 1;
