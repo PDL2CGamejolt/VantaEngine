@@ -457,7 +457,7 @@ class PlayState extends MusicBeatState
 		timeTxt.borderSize = 2;
 		timeTxt.visible = updateTime = showTime;
 		if(ClientPrefs.data.downScroll) timeTxt.y = FlxG.height - 44;
-		if(ClientPrefs.data.timeBarType == 'Song Name') timeTxt.text = SONG.song;
+		if(ClientPrefs.data.timeBarType == 'Song Name') timeTxt.text = "Song: " + SONG.song;
 
 		timeBar = new HealthBar(0, timeTxt.y + (timeTxt.height / 4), 'timeBar', function() return songPercent, 0, 1);
 		timeBar.scrollFactor.set();
@@ -1058,11 +1058,12 @@ class PlayState extends MusicBeatState
 			str += ' ($percent%) - $ratingFC';
 		}
 
-		scoreTxt.text = 'Score: ' + songScore
-		+ ' | Misses: ' + songMisses
-		+ ' | Rating: ' + str;
+		scoreTxt.text = 'Song Score: ' + songScore
+		+ ' | Combo Breaks: ' + songMisses
+		+ ' | Rating: ' + str
+                + ' | Deaths: ' + deathCounter;
 
-		if(ClientPrefs.data.scoreZoom && !miss && !cpuControlled)
+		if(ClientPrefs.data.scoreZoom && !miss)
 		{
 			if(scoreTxtTween != null) {
 				scoreTxtTween.cancel();
@@ -1516,10 +1517,6 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
-		if (FlxG.keys.justPressed.NINE)
-		{
-			iconP1.swapOldIcon();
-		}
 		callOnLuas('onUpdate', [elapsed]);
 
 		FlxG.camera.followLerp = 0;
