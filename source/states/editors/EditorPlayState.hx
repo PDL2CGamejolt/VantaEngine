@@ -615,10 +615,6 @@ class EditorPlayState extends MusicBeatSubstate
 			if(numScore.x > xThing) xThing = numScore.x;
 		}
 		comboSpr.x = xThing + 50;
-		/*
-			trace(combo);
-			trace(seperatedScore);
-			*/
 
 		coolText.text = Std.string(seperatedScore);
 		// add(coolText);

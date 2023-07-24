@@ -1290,12 +1290,13 @@ class FunkinLua {
 			return false;
 
 			#else
-			if(game.endingSong) {
-				game.endSong();
-			} else {
-				game.startCountdown();
-			}
-			return true;
+			new FlxTimer().start(0.05, function(tmr:FlxTimer) {
+				if(game.endingSong) {
+					game.endSong();
+				} else {
+					game.startCountdown();
+				}
+			});
 			#end
 		});
 
