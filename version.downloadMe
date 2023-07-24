@@ -5,7 +5,7 @@
 - Lane Underlays
 - New Regex LUA Functions
 - SScript
-- Optional Loading Screen
+- Optional Loading Screen (disadbled by default, can be enabled via Project.xml)
 - 25-min Music Length Cap Upgrade (More than 3 hours)
 - Hold Animations
 - Additional Classes
