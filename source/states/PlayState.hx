@@ -172,6 +172,8 @@ class PlayState extends MusicBeatState
 	public var health:Float = 1;
 	public var combo:Int = 0;
 
+	public var vignette:FlxSprite;
+
 	public var healthBar:HealthBar;
 	public var timeBar:HealthBar;
 	var songPercent:Float = 0;
@@ -561,6 +563,17 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.data.downScroll) {
 			botplayTxt.y = timeBar.y - 78;
 		}
+
+		vignette = new FlxSprite().loadGraphic(Paths.image('vignette'));
+		vignette.width = 1280;
+		vignette.height = 720;
+		vignette.x = 0;
+		vignette.y = 0;
+		vignette.updateHitbox();
+		vignette.alpha = 0;
+		if (ClientPrefs.enableVignette)
+			add(vignette);
+
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
 		notes.cameras = [camHUD];
@@ -576,6 +589,8 @@ class PlayState extends MusicBeatState
 		botplayTxt.cameras = [camHUD];
 		timeBar.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
+
+		vignette.cameras = [camOther];
 
 		startingSong = true;
 		
@@ -1588,6 +1603,9 @@ class PlayState extends MusicBeatState
 		iconP2.x = healthBar.barCenter - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
 		iconP1.animation.curAnim.curFrame = (healthBar.percent < 20) ? 1 : 0;
 		iconP2.animation.curAnim.curFrame = (healthBar.percent > 80) ? 1 : 0;
+
+		if (ClientPrefs.enableVignette)
+			vignette.alpha = 0.9 - (health / maxHealth);
 
 		if (controls.justPressed('debug_2') && !endingSong && !inCutscene)
 			openCharacterEditor();
