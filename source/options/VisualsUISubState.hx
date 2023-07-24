@@ -132,6 +132,15 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 		option.onChange = onChangeFPSCounter;
 		#end
+
+		var option:Option = new Option('Colorblind Filter',
+			'You can set colorblind filter (makes the game more playable for colorblind people)',
+			'colorblindMode',
+			'string',
+			'None', 
+			['None', 'Deuteranopia', 'Protanopia', 'Tritanopia']);
+		option.onChange = ColorblindFilters.applyFiltersOnGame;
+		addOption(option);
 		
 		var option:Option = new Option('Pause Screen Song:',
 			"What song do you prefer for the Pause Screen?",

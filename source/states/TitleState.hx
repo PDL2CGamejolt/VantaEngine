@@ -15,6 +15,8 @@ import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
 
+import backend.ColorblindFilters;
+
 import shaders.ColorSwap;
 
 import states.StoryMenuState;
@@ -192,6 +194,7 @@ class TitleState extends MusicBeatState
 
 	function startIntro()
 	{
+		ColorblindFilters.applyFiltersOnGame(); // applies colorbind filters, ok?
 		if (!initialized)
 		{
 			if(FlxG.sound.music == null) {

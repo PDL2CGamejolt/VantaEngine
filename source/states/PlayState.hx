@@ -482,7 +482,7 @@ class PlayState extends MusicBeatState
 			playerLaneUnderlay.color = FlxColor.BLACK;
 			playerLaneUnderlay.scrollFactor.set();
 			add(playerLaneUnderlay);
-			if (!ClientPrefs.middleScroll) {
+			if (!ClientPrefs.data.middleScroll) {
 				opponentLaneUnderlay = new FlxSprite(0, 0).makeGraphic(110 * 4 + 50, FlxG.height * 2);
 				opponentLaneUnderlay.alpha = ClientPrefs.data.laneUnderlayOpacity;
 				opponentLaneUnderlay.color = FlxColor.BLACK;
