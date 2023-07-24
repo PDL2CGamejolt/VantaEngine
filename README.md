@@ -49,7 +49,7 @@ _____________________________________
 
 
 ## Mod Support
-* Probably one of the main points of this engine, you can code in .lua files outside of the source code, making your own weeks without even messing with the source!
+* Probably one of the main points of this engine, you can code in .lua and .hx files outside of the source code, making your own weeks without even messing with the source!
 * Comes with a Mod Organizing/Disabling Menu.
 
 
