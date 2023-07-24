@@ -2,8 +2,10 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Friday Night Funkin': Vanta Engine" file="VantaEngine" packageName="com.vantafnf.vantaengine" package="com.vantafnf.vantaengine" main="Main" version="0.2.8" company="VantaFNF" />
+	<app title="Friday Night Funkin': Psych Engine" file="PsychEngine" packageName="com.shadowmario.psychengine" package="com.shadowmario.psychengine" main="Main" version="0.2.8" company="ShadowMario" />
 
+	<!--Switch Export with Unique ApplicationID and Icon-->
+	<set name="APP_ID" value="0x0100f6c013bbc000" />
 
 	<!-- NOTE TO SELF: DISABLE THIS IF ISSUES ARE FOUND -->
 	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB"/> <!-- stable luas PUT AFTER FIRST LINE WITH APP NAME AND ETC -->
@@ -38,6 +40,9 @@
 
 	<!--Mobile-specific-->
 	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false"/>
+
+	<!--Switch-specific-->
+	<window if="switch" orientation="landscape" fullscreen="true" width="0" height="0" resizable="true" />
 
 	<!-- _____________________________ Path Settings ____________________________ -->
 
@@ -92,7 +97,7 @@
 	<section if="MODS_ALLOWED">
 		<assets path='example_mods' rename='mods' embed='false'/>
 	</section>
-	<assets path='art/readme.txt' rename='vanillareadme.txt' />
+	<assets path='art/readme.txt' rename='do NOT readme.txt' />
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
@@ -105,8 +110,9 @@
 	<haxelib name="hxCodec" if="VIDEOS_ALLOWED"/>
 	<haxelib name="discord_rpc" if="desktop"/>
 	<haxelib name="tjson" />
-	<haxelib name="hscript" />
-	<define name="hscriptPos" />
+	<haxelib name="SScript" />
+	<haxedef name="openflPos" />
+	<haxedef name="hscriptPos" />
 
 	<!-- Enables a terminal log prompt on debug builds -->
 	<haxelib name="hxcpp-debug-server" if="debug"/>
@@ -115,7 +121,7 @@
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
 	<!--Enable the Flixel core recording system-->
-	<haxedef name="FLX_RECORD" />
+	<!--<haxedef name="FLX_RECORD" />-->
 
 	<!--Disable the right and middle mouse buttons-->
 	<!-- <haxedef name="FLX_NO_MOUSE_ADVANCED" /> -->
@@ -156,8 +162,6 @@
 	<!--Macro fixes-->
 	<haxeflag name="--macro" value="allowPackage('flash')" />
 	<haxeflag name="--macro" value="include('my.pack')" />
-	<haxeflag name="--macro" value="macros.AdditionalClasses.add()" />
-	<haxeflag name="-dce" value="no" />
 
 	<!-- _________________________________ Custom _______________________________ -->
 
