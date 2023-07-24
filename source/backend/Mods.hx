@@ -28,6 +28,7 @@ class Mods
 		'shaders',
 		'videos',
 		'images',
+		'libs',
 		'stages',
 		'weeks',
 		'fonts',
