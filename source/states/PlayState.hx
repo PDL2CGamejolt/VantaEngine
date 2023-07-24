@@ -3011,8 +3011,8 @@ class PlayState extends MusicBeatState
 		if (generatedMusic)
 			notes.sort(FlxSort.byY, ClientPrefs.data.downScroll ? FlxSort.ASCENDING : FlxSort.DESCENDING);
 
-		iconP1.scale.set(1.2, 1.2);
-		iconP2.scale.set(1.2, 1.2);
+		iconP1.scale.set(1.5, 1.2);
+		iconP2.scale.set(1.5, 1.2);
 
 		iconP1.updateHitbox();
 		iconP2.updateHitbox();
