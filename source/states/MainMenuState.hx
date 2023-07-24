@@ -179,6 +179,10 @@ class MainMenuState extends MusicBeatState
 				changeItem(1);
 			}
 
+			if(FlxG.mouse.wheel != 0) {
+				changeItem(-FlxG.mouse.wheel);
+			}
+
 			if (controls.BACK)
 			{
 				selectedSomethin = true;

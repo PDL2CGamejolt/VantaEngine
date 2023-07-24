@@ -70,7 +70,7 @@ class ModsMenuState extends MusicBeatState
 		bg.screenCenter();
 
 		noModsTxt = new FlxText(0, 0, FlxG.width, "NO MODS INSTALLED\nPRESS BACK TO EXIT AND INSTALL A MOD", 48);
-		if(FlxG.random.bool(0.1)) noModsTxt.text += '\nBITCH.'; //meanie
+		if(FlxG.random.bool(0.1)) noModsTxt.text += '\nBRUH.'; // meanie
 		noModsTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		noModsTxt.scrollFactor.set();
 		noModsTxt.borderSize = 2;
@@ -453,6 +453,9 @@ class ModsMenuState extends MusicBeatState
 		{
 			changeSelection(1);
 			FlxG.sound.play(Paths.sound('scrollMenu'));
+		}
+		if(FlxG.mouse.wheel != 0) {
+			changeSelection(-FlxG.mouse.wheel);
 		}
 		updatePosition(elapsed);
 		super.update(elapsed);
