@@ -180,6 +180,14 @@ class Paths
 	{
 		return getPath('$key.lua', TEXT, library);
 	}
+	inline static public function ini(key:String, ?library:String)
+		{
+			return getPath('$key.ini', TEXT, library);
+		}
+	inline static public function ini(key:String, ?library:String)
+		{
+				return getPath('ndlls/$key.ndll', BINARY, library);
+		}
 
 	static public function video(key:String)
 	{
