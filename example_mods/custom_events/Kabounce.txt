@@ -1,0 +1,7 @@
+This does a bounce tween loop like in kaboom
+----------------------------------------------------------
+Value:1 | Toggle (0 = off | 1 = on), Bars (Same as toggle)
+Value:2 | Angle, Intensity, Bounce Y
+----------------------------------------------------------
+Value:1-Example | (1, 1)
+Value:2-Example | (0.5, 2, 7)

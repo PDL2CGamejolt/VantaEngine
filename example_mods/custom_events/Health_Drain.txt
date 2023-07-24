@@ -1,0 +1,5 @@
+Main Drain
+	Value 1: true or false, drain amount
+
+Opponent Drain
+	Value 2: true or false, drain amount

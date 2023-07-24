@@ -1,0 +1,19 @@
+Value 1: x, y, duration, ease*, additive**
+Value 2(optional): delayUntilBack***, stick****
+
+Tweens the camera to a certain position
+After the tween is over, it'll focus on who it would normally (bf if mustHitSection, dad if not,
+gf if gfSection)
+(sorry that it clips out of the box just open the txt file lmao)
+<<PLEASE NOTE THAT camFollow AND, BY EXTENSION, cameraX//cameraY, WILL
+*NOT* UPDATE WHILE THE CAMERA IS TWEENING.>>
+
+
+*MUST BE PROPERLY CAPITALISED!!!!1 (aka "cubeInOut" instead of "cubeinout")
+**true/false. if false it moves the camera to the specified positions (like Camera Follow Pos)
+if true, it acts as an offset to the current camera pos (adds or subtracts xy from it instead of hardcoded
+coordinates, if that makes sense). Defaults to false.
+***how long the camera will wait before going back to normal. defaults to 0 if no input is given
+****true/false. whether the camera sticks after the tween is done or not. defaults to false.
+how to reset the camera if stick is true: set isCameraOnForcedPos to false (or have a Camera Follow Pos
+event with blank values)
