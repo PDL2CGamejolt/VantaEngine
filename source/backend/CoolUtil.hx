@@ -106,6 +106,26 @@ class CoolUtil
 		return dumbArray;
 	}
 
+	public static function formatString(string:String):String
+		{
+			 var split:Array<String> = string.split('-');
+			 var formattedString:String = '';
+			 for (i in 0...split.length) 
+			 {
+				  var piece:String = split[i];
+				  var allSplit = piece.split('');
+				  var firstLetterUpperCased = allSplit[0].toUpperCase();
+				  var substring = piece.substr(1, piece.length - 1);
+				  var newPiece = firstLetterUpperCased + substring;
+				  if (i != split.length - 1)
+				  {
+						newPiece += " ";
+				  }
+				  formattedString += newPiece;
+			 }
+			 return formattedString;
+		}
+
 	inline public static function browserLoad(site:String) {
 		#if linux
 		Sys.command('/usr/bin/xdg-open', [site]);

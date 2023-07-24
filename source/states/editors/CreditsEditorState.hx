@@ -34,6 +34,7 @@ import openfl.events.IOErrorEvent;
 import openfl.utils.Assets as OpenFlAssets;
 import openfl.utils.ByteArray;
 
+import objects.AttachedSprite;
 using StringTools;
 
 class CreditsEditorState extends MusicBeatState
@@ -63,6 +64,8 @@ class CreditsEditorState extends MusicBeatState
 
 	override function create()
 	{
+        FlxG.sound.playMusic(Paths.music('breakfast'), 0.5);
+        
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("Credits Editor", null);

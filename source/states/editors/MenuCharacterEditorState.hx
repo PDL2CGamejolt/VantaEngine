@@ -33,6 +33,9 @@ class MenuCharacterEditorState extends MusicBeatState
 			confirm_anim: 'M Dad Idle',
 			flipX: false
 		};
+
+		FlxG.sound.playMusic(Paths.music('breakfast'), 0.5);
+		
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("Menu Character Editor", "Editting: " + characterFile.image);
