@@ -529,6 +529,8 @@ class PlayState extends MusicBeatState
 		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.data.hideHud;
 		add(scoreTxt);
+                var watermark:FlxText = new FlxText(2, 695, 0, SONG.song + " - Vanta Edition", 18);
+                add(watermark);
 
 		botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "Botplay: ON", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]), CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -2362,7 +2364,7 @@ class PlayState extends MusicBeatState
 			if (PlayState.isPixelStage) uiSuffix = '-pixel';
 			antialias = !isPixelStage;
 		}
-
+                if(!cpuControlled) {
 		rating.loadGraphic(Paths.image(uiPrefix + daRating.image + uiSuffix));
 		rating.cameras = [camHUD];
 		rating.screenCenter();
@@ -2488,6 +2490,7 @@ class PlayState extends MusicBeatState
 			},
 			startDelay: Conductor.crochet * 0.002 / playbackRate
 		});
+	}
 	}
 
 	public var strumsBlocked:Array<Bool> = [];
