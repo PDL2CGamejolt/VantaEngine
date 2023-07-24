@@ -12,10 +12,16 @@ import sys.FileSystem;
 
 class CoolUtil
 {
+	inline public static function txtSplit(path:String)
+		{
+			return [
+				for (i in Assets.getText(path).trim().split('\n')) i.trim()
+			];
+		}
+		
 	inline public static function quantize(f:Float, snap:Float){
 		// changed so this actually works lol
 		var m:Float = Math.fround(f * snap);
-		trace(snap);
 		return (m / snap);
 	}
 
