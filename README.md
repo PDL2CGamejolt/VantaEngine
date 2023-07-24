@@ -39,6 +39,45 @@ same goes for *Lua Scripts*, comment out or delete the line with `LUA_ALLOWED`, 
 * Keoiki - Note Splash Animations
 * Smokey - Sprite Atlas Support
 * superpowers04 - LUA JIT Fork and some Lua reworks
+* [The Denpa Engine Team](https://github.com/UmbratheUmbreon/PublicDenpaEngine/tree/main#denpa-engine-team) - Some code
+
+## License Summary
+
+### Permitted Actions
+
+You are permitted to perform the following actions:
+
+- Download and install this engine.
+
+### Required Actions
+
+You must obtain permission to perform the following actions:
+
+- Redistribute the unmodified engine on a website other than Gamebanana, Gamejolt or Github.
+- Use parts of this engine in another engine or mod and provide credit.
+
+### Permitted Actions with Conditions
+
+You are permitted to perform the following actions under the following conditions:
+
+- Modify this engine and redistribute the modified engine on GameBanana, GameJolt, or GitHub, provided that you offer the same rights to others.
+
+### Prohibited Actions
+
+You are not allowed to perform the following actions under any circumstances:
+
+- Use this engine or parts of this engine for commercial purposes.
+- Use parts of this engine in another engine or mod without providing credit.
+- Publicly distribute malicious or potentially harmful scripts that utilize this engine. 
+
+### Additional Conditions
+
+You agree to the following additional conditions:
+
+- You will not modify this engine in any way that violates the license agreement.
+- You will not distribute any modified versions of this engine that do not comply with the terms of this license agreement.
+
+This license agreement is subject to change at any time, and continued use of the engine constitutes acceptance of any such changes.
 _____________________________________
 
 # Features
