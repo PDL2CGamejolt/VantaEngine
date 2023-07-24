@@ -138,7 +138,6 @@ class VisualsUISubState extends BaseOptionsMenu
 			'You can set colorblind filter (makes the game more playable for colorblind people)',
 			'colorblindMode',
 			'string',
-			'None', 
 			['None', 'Deuteranopia', 'Protanopia', 'Tritanopia']);
 		option.onChange = ColorblindFilters.applyFiltersOnGame;
 		addOption(option);
