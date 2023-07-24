@@ -1604,7 +1604,7 @@ class PlayState extends MusicBeatState
 		iconP1.animation.curAnim.curFrame = (healthBar.percent < 20) ? 1 : 0;
 		iconP2.animation.curAnim.curFrame = (healthBar.percent > 80) ? 1 : 0;
 
-		if (ClientPrefs.enableVignette)
+		if (ClientPrefs.data.enableVignette)
 			vignette.alpha = 0.9 - (health / maxHealth);
 
 		if (controls.justPressed('debug_2') && !endingSong && !inCutscene)
