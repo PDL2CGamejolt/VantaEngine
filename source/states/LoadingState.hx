@@ -159,6 +159,7 @@ class LoadingState extends MusicBeatState
 		Paths.setCurrentLevel(directory);
 		trace('Setting asset folder to ' + directory);
 
+		#if LOADING_SCREEN
 		var loaded:Bool = false;
 		if (PlayState.SONG != null) {
 			loaded = isSoundLoaded(getSongPath()) && (!PlayState.SONG.needsVoices || isSoundLoaded(getVocalPath())) && isLibraryLoaded("shared") && isLibraryLoaded('week_assets');
@@ -166,6 +167,7 @@ class LoadingState extends MusicBeatState
 
 		if (!loaded)
 			return new LoadingState(target, stopMusic, directory);
+		#end
 		
 		if (stopMusic && FlxG.sound.music != null)
 			FlxG.sound.music.stop();
@@ -173,6 +175,7 @@ class LoadingState extends MusicBeatState
 		return target;
 	}
 
+	#if LOADING_SCREEN
 	static function isSoundLoaded(path:String):Bool
 	{
 		trace(path);
@@ -183,6 +186,7 @@ class LoadingState extends MusicBeatState
 	{
 		return Assets.getLibrary(library) != null;
 	}
+	#end
 
 	override function destroy()
 	{
