@@ -32,6 +32,7 @@ import lime.utils.Assets;
 import openfl.utils.Assets as OpenFlAssets;
 import openfl.events.KeyboardEvent;
 import tjson.TJSON as Json;
+import haxe.macro.Type.AbstractType;
 
 import psychlua.FunkinLua;
 
@@ -1636,8 +1637,21 @@ class PlayState extends MusicBeatState
 				if(!cpuControlled) {
 					keysCheck();
 				} else if(boyfriend.animation.curAnim != null && boyfriend.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * boyfriend.singDuration && boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss')) {
-					boyfriend.dance();
-					//boyfriend.animation.curAnim.finish();
+					var anim:String = boyfriend.animation.curAnim.name;
+					if (anim.endsWith('-loop'))
+						anim = anim.substr(0, anim.length - 5);
+
+					if (boyfriend.animOffsets.exists(anim + '-release')) {
+						boyfriend.playAnim(anim + '-release');
+						var oldCallback = boyfriend.animation.finishCallback;
+						var char = boyfriend;
+						char.animation.finishCallback = function(name:String) {
+							char.dance();
+							char.animation.finishCallback = oldCallback;
+						}
+					}
+					else
+						boyfriend.dance();
 				}
 
 				if(notes.length > 0)
@@ -2667,8 +2681,22 @@ class PlayState extends MusicBeatState
 			}
 			else if (boyfriend.animation.curAnim != null && boyfriend.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * boyfriend.singDuration && boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss'))
 			{
-				boyfriend.dance();
-				//boyfriend.animation.curAnim.finish();
+				var anim:String = boyfriend.animation.curAnim.name;
+				if (anim.endsWith('-loop'))
+					anim = anim.substr(0, anim.length - 5);
+
+				if (boyfriend.animOffsets.exists(anim + '-release')) {
+					boyfriend.playAnim(anim + '-release');
+					var oldCallback = boyfriend.animation.finishCallback;
+					var char = boyfriend;
+					char.animation.finishCallback = function(name:String) {
+						if (char.animation.curAnim != null && char.animation.curAnim.name == anim + '-release')
+							char.dance();
+						char.animation.finishCallback = oldCallback;
+					}
+				}
+				else
+					boyfriend.dance();
 			}
 		}
 
@@ -2730,7 +2758,7 @@ class PlayState extends MusicBeatState
 			var suffix:String = '';
 			if(note != null) suffix = note.animSuffix;
 
-			var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, direction)))] + 'miss' + suffix;
+			var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))] + note.animSuffix;
 			char.playAnim(animToPlay, true);
 			
 			if(char != gf && combo > 5 && gf != null && gf.animOffsets.exists('sad'))
@@ -2769,7 +2797,17 @@ class PlayState extends MusicBeatState
 
 			if(char != null)
 			{
-				char.playAnim(animToPlay, true);
+				var hasHoldAnimation:Bool = false;
+				var isHoldAnimation:Bool = false;
+				if (char.animOffsets.exists(animToPlay + '-hold'))
+					hasHoldAnimation = true;
+				if (note.tail.length > 0 && hasHoldAnimation) {
+					animToPlay += '-hold';
+					isHoldAnimation = true;
+				}
+
+				if (!(note.isSustainNote && hasHoldAnimation)) // Play unless the character should continue playing the hold animation
+					char.playAnim(animToPlay, true);
 				char.holdTimer = 0;
 			}
 		}
@@ -2846,16 +2884,18 @@ class PlayState extends MusicBeatState
 				
 				if(char != null)
 				{
-					char.playAnim(animToPlay + note.animSuffix, true);
-					char.holdTimer = 0;
-					
-					if(note.noteType == 'Hey!') {
-						if(char.animOffsets.exists(animCheck)) {
-							char.playAnim(animCheck, true);
-							char.specialAnim = true;
-							char.heyTimer = 0.6;
-						}
+					var hasHoldAnimation:Bool = false;
+					var isHoldAnimation:Bool = false;
+					if (char.animOffsets.exists(animToPlay + '-hold'))
+						hasHoldAnimation = true;
+					if (note.tail.length > 0 && hasHoldAnimation) {
+						animToPlay += '-hold';
+						isHoldAnimation = true;
 					}
+	
+					if (!(note.isSustainNote && hasHoldAnimation)) // Play unless the character should continue playing the hold animation
+						char.playAnim(animToPlay, true);
+					char.holdTimer = 0;
 				}
 			}
 
