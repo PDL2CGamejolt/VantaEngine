@@ -67,6 +67,11 @@
       "ref": "master",
       "url": "https://github.com/Aidan63/linc_discord-rpc"
     },
+        {
+      "name": "hxvm-luajit",
+      "type": "haxelib",
+      "version": null
+    },
     {
       "name": "linc_luajit",
       "type": "git",
