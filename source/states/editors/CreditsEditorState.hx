@@ -312,7 +312,7 @@ class CreditsEditorState extends MusicBeatState
 				var icon:AttachedSprite;
 				if(Paths.fileExists('images/credits/' + creditsStuff[i][1] + '.png', IMAGE)) icon = new AttachedSprite('credits/' + creditsStuff[i][1]);
 				else {
-					icon = new AttachedSprite('credits/unknow'); // If icon didnt load it will load the unknow icon.
+					icon = new AttachedSprite('credits/missing_icon'); // If the icon didn't load, it will load the missing_icon icon.
 					if(creditsStuff[i][1] == null || creditsStuff[i][1] == '') icon = new AttachedSprite('credits/none');
 				}
 
