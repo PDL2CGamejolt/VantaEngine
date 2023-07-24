@@ -8,11 +8,11 @@ function onCreate()
 makeLuaText("tnh", 'Notes Hit: 0', 235, tnhx, 259);
 setTextFont('tnh', font)
 makeLuaText("cm", 'Combo: 0', 200, -getProperty('tnh.x') + cmoffset, getProperty('tnh.y') + cmy + 10);
-makeLuaText("sick", 'Perfects!: 0', 200, getProperty('cm.x'), getProperty('cm.y') + 30);
-makeLuaText("good", 'Goods: 0', 200, getProperty('cm.x'), getProperty('sick.y') + 30);
-makeLuaText("bad", 'Bads: 0', 200, getProperty('cm.x'), getProperty('good.y') + 30);
-makeLuaText("shit", 'Bruhs: 0', 200, getProperty('cm.x'), getProperty('bad.y') + 30);
-makeLuaText("miss", 'Misses: 0', 200, getProperty('cm.x'), getProperty('shit.y') + 30);
+makeLuaText("sick", 'Funkies: 0', 200, getProperty('cm.x'), getProperty('cm.y') + 30);
+makeLuaText("good", 'OKs: 0', 200, getProperty('cm.x'), getProperty('sick.y') + 30);
+makeLuaText("bad", 'Mehs: 0', 200, getProperty('cm.x'), getProperty('good.y') + 30);
+makeLuaText("shit", 'Ughs: 0', 200, getProperty('cm.x'), getProperty('bad.y') + 30);
+makeLuaText("miss", 'Combo Breaks: 0', 200, getProperty('cm.x'), getProperty('shit.y') + 30);
 setObjectCamera("tnh", 'camHUD');
 setTextSize('tnh', 20);
 addLuaText("tnh");
@@ -65,11 +65,11 @@ end
 function onUpdate(elapsed)
 notehitloltosting = tostring(notehitlol)
 setTextString('cm', 'Combo: ' .. getProperty('combo'))
-setTextString('sick', 'Perfects!: ' .. getProperty('sicks'))
-setTextString('good', 'Goods: ' .. getProperty('goods'))
-setTextString('bad', 'Bads: ' .. getProperty('bads'))
-setTextString('shit', 'Bruhs: ' .. getProperty('shits'))
-setTextString('miss', 'Misses: ' .. getProperty('songMisses'))
+setTextString('sick', 'Funkies: ' .. getProperty('sicks'))
+setTextString('good', 'OKs: ' .. getProperty('goods'))
+setTextString('bad', 'Mehs: ' .. getProperty('bads'))
+setTextString('shit', 'Ughs: ' .. getProperty('shits'))
+setTextString('miss', 'Combo Breaks: ' .. getProperty('songMisses'))
 -- start of "update", some variables weren't updated yet
 -- setTextString('tnh', 'Notes Hit: ' + 1)
 end
