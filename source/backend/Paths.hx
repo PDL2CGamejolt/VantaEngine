@@ -184,7 +184,7 @@ class Paths
 		{
 			return getPath('$key.ini', TEXT, library);
 		}
-	inline static public function ini(key:String, ?library:String)
+	inline static public function ndll(key:String, ?library:String)
 		{
 				return getPath('ndlls/$key.ndll', BINARY, library);
 		}
