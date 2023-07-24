@@ -3,6 +3,7 @@ package options;
 import objects.Note;
 import objects.StrumNote;
 import objects.Alphabet;
+import backend.ColorblindFilters;
 
 class VisualsUISubState extends BaseOptionsMenu
 {
