@@ -476,13 +476,15 @@ class PlayState extends MusicBeatState
 		add(grpNoteSplashes);
 
 
-		if (ClientPrefs.data.laneUnderlayOpacity > 0) {
+		if (ClientPrefs.data.laneUnderlayOpacity > 0)
+		{
 			playerLaneUnderlay = new FlxSprite(0, 0).makeGraphic(110 * 4 + 50, FlxG.height * 2);
 			playerLaneUnderlay.alpha = ClientPrefs.data.laneUnderlayOpacity;
 			playerLaneUnderlay.color = FlxColor.BLACK;
 			playerLaneUnderlay.scrollFactor.set();
 			add(playerLaneUnderlay);
-			if (!ClientPrefs.data.middleScroll) {
+			if (!ClientPrefs.data.middleScroll)
+			{
 				opponentLaneUnderlay = new FlxSprite(0, 0).makeGraphic(110 * 4 + 50, FlxG.height * 2);
 				opponentLaneUnderlay.alpha = ClientPrefs.data.laneUnderlayOpacity;
 				opponentLaneUnderlay.color = FlxColor.BLACK;
@@ -928,18 +930,23 @@ class PlayState extends MusicBeatState
 
 			generateStaticArrows(0);
 			generateStaticArrows(1);
-			playerLaneUnderlay.x = playerStrums.members[0].x - 25;
-			playerLaneUnderlay.screenCenter(Y);
-			opponentLaneUnderlay.x = opponentStrums.members[0].x - 25;
-			opponentLaneUnderlay.screenCenter(Y);
-			for (i in 0...playerStrums.length) {
+			if (ClientPrefs.data.laneUnderlayOpacity > 0)
+			{
+				playerLaneUnderlay.x = playerStrums.members[0].x - 25;
+				playerLaneUnderlay.screenCenter(Y);
+				opponentLaneUnderlay.x = opponentStrums.members[0].x - 25;
+				opponentLaneUnderlay.screenCenter(Y);
+			}
+			for (i in 0...playerStrums.length)
+			{
 				setOnLuas('defaultPlayerStrumX' + i, playerStrums.members[i].x);
 				setOnLuas('defaultPlayerStrumY' + i, playerStrums.members[i].y);
 			}
-			for (i in 0...opponentStrums.length) {
+			for (i in 0...opponentStrums.length)
+			{
 				setOnLuas('defaultOpponentStrumX' + i, opponentStrums.members[i].x);
 				setOnLuas('defaultOpponentStrumY' + i, opponentStrums.members[i].y);
-				//if(ClientPrefs.data.middleScroll) opponentStrums.members[i].visible = false;
+				// if(ClientPrefs.data.middleScroll) opponentStrums.members[i].visible = false;
 			}
 
 			startedCountdown = true;
