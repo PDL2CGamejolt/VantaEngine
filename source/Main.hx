@@ -151,7 +151,7 @@ class Main extends Sprite
 		dateNow = dateNow.replace(" ", "_");
 		dateNow = dateNow.replace(":", "'");
 
-		path = "./crash/" + "PsychEngine_" + dateNow + ".txt";
+		path = "./crashes/" + "Vanta Engine crashed on " + dateNow + ".txt";
 
 		for (stackItem in callStack)
 		{
@@ -164,17 +164,17 @@ class Main extends Sprite
 			}
 		}
 
-		errMsg += "\nUncaught Error: " + e.error + "\nPlease report this error to the GitHub page: https://github.com/ShadowMario/FNF-PsychEngine\n\n> Crash Handler written by: sqirra-rng";
+		errMsg += "\nYour game crashed. Reason: " + e.error + "\nPlease report this crash to the GitHub page: https://github.com/PDL2CGamejolt/VantaEngine/issues\n\n> Crash Handler written by: sqirra-rng\n\n> Modified by: Vanta";
 
-		if (!FileSystem.exists("./crash/"))
-			FileSystem.createDirectory("./crash/");
+		if (!FileSystem.exists("./crashes/"))
+			FileSystem.createDirectory("./crashes/");
 
 		File.saveContent(path, errMsg + "\n");
 
 		Sys.println(errMsg);
 		Sys.println("Crash dump saved in " + Path.normalize(path));
 
-		Application.current.window.alert(errMsg, "Error!");
+		Application.current.window.alert(errMsg, "Your game has crashed. Check below.");
 		DiscordClient.shutdown();
 		Sys.exit(1);
 	}
