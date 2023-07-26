@@ -13,14 +13,14 @@ class OutdatedState extends MusicBeatState
 		add(bg);
 
 		warnText = new FlxText(0, 0, FlxG.width,
-			"Sup bro, looks like you're running an   \n
+			"Hold on! It looks like you're running an   \n
 			outdated version of Vanta Engine (" + MainMenuState.vantaEngineVersion + "),\n
-			please update to " + TitleState.updateVersion + "!\n
+			please update to the latest version, which is" + TitleState.updateVersion + "!\n
 			Press ESCAPE to proceed anyway.\n
 			\n
-			Thank you for using the Engine!",
+			Thank you for choosing Vanta Engine!",
 			32);
-		warnText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
+		warnText.setFormat("VCR OSD Mono", 32, FlxColor.REDD, CENTER);
 		warnText.screenCenter(Y);
 		add(warnText);
 	}
@@ -30,7 +30,7 @@ class OutdatedState extends MusicBeatState
 		if(!leftState) {
 			if (controls.ACCEPT) {
 				leftState = true;
-				CoolUtil.browserLoad("https://github.com/ShadowMario/FNF-PsychEngine/releases");
+				CoolUtil.browserLoad("https://github.com/PDL2CGamejolt/VantaEngine/releases");
 			}
 			else if(controls.BACK) {
 				leftState = true;
