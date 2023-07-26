@@ -20,7 +20,7 @@ class OutdatedState extends MusicBeatState
 			\n
 			Thank you for choosing Vanta Engine!",
 			32);
-		warnText.setFormat("VCR OSD Mono", 32, FlxColor.REDD, CENTER);
+		warnText.setFormat("VCR OSD Mono", 32, FlxColor.RED, CENTER);
 		warnText.screenCenter(Y);
 		add(warnText);
 	}
